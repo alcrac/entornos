@@ -3,61 +3,58 @@ package javaapplication3;
 
 public class JavaApplication3 {
 
-public class MatrizPir extends Matriz{
- 
-	
-	public MatrizPir (int base){
-	 /*El constructor garantiza:
-	  * 1. que la base (col) sea impar
-	  * 2.que la altura (fil) sea adecuada a la base
-	  */
+public static void main(String[] args) {
 		
-		super();
-		col= (base%2==0)? base+1: base;
-		fil=(col+1)/2;
-		m= new char [fil][col];
- }
-	public void piramide(){
-		//pintar piramide
-		// pista: i+j=fil-1 (lado izq)|| j-i=fil-1 (lado der)
+		/*
+		 * Para empezar, suponemos que la base va a ser impar
+		 */
+		int base=7;
 		
-		int centro= (col-1)/2;
-	
-		for (int i=0;i<fil;i++){
+		//Calcular el nº de filas
+		int filas= (base+1)/2;
+		
+		
+		/*
+		 * Para cada fila dese 0 hasta el filas-1
+		 * 
+		 * 1.clacular los blancos + imprimirlos
+		 * 2. imprimir los asteriscos + imprimirlos
+		 * 
+		 */
+		
+		for (int i=0; i<filas; i++) {
+			//i es el nº de fila
+			/*
+			 *Hacemos una tabla con i y con el nº de blancos
+			 *correspondiente a cada i.
+			 *vemos que la suma es constante, así que
+			 *podemos formular
+			 *
+			 * i+blancos=filas-1
+			 * 
+			 * así que
+			 * blancos=fila-1-i
+			 */
 			
-			//blancos
-			for (int j=0;j<centro-i;j++) m[i][j]= ' ';
+			//clacular e imprimir blancos
+			for (int j= filas-i; j>=0; j--)
+				System.out.print(' ');
+			//clacular e imprimir asteriscos
+			/*
+			 * para calcular los asteriscos realizamos
+			 * un razonamiento análogo a los blancos
+			 */
 			
-			//*
-			for (int j=centro-i;j<centro-i+2*i+1;j++)m[i][j]= '*';
+			for(int j=0; j<2*i+1; j++)
+				System.out.print('*');
 			
+			//los blancos del final no hace falta imprimir
 			
-			//finalizar con blancos
-			for (int j=centro+i+1;j<col;j++)m[i][j]=' ';
-		}
-	}
-	
-	public void piramidevacia(){
-		//pintar piramide
-		int centro= (col-1)/2;
-	
-		for (int i=0;i<fil;i++){
+			//imprimir salto de línea
+			System.out.print('\n');
 			
-			//blancos
-			for (int j=0;j<centro-i;j++) m[i][j]= ' ';
-			
-			//*
-			m[i][centro-i]='*';
-			m[i][centro+i]='*';
-			
-			//finalizar con blancos
-			for (int j=centro-i+1;j<centro-i+2*i;j++){
-				m[i][j]= ' ';
-			}
-			
-			for (int j=centro+i+1;j<col;j++)m[i][j]=' ';
-			
-		}
-		//pintar la parte de abajo
-		for(int j=0;j<col;j++)m[fil-1][j]='*';
-        }}}
+		}//for
+
+	}//main
+
+}//class
